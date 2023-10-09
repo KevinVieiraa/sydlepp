@@ -1,0 +1,128 @@
+{
+    "manifest_version": 3,
+
+    "name": "Sydle++",
+    "version": "1.0",
+    "description": "Implementação de atalhos e funcionalidades de produtividade para a plataforma Sydle One",
+
+    "icons": {
+        "16": "icons/icon16.png",
+        "48": "icons/icon48.png",
+        "128": "icons/icon128.png"
+    },
+
+    "action": {
+        "default_title": "Sydle++", 
+        "default_popup": "popup/popup.html" 
+    },
+
+    "permissions": [
+        "activeTab",
+        "storage",
+        "commands"
+    ],
+
+    "content_scripts": [{
+        "js": [
+            "lib/sweetalert2.all.min.js", 
+            "lib/jquery.min.js", 
+            "lib/jquery-ui.min.js", 
+            "lib/renderjson.js", 
+            "src/scripts/config.js",
+            "src/scripts/utils.js",
+            "src/scripts/autocompleteHandler.js",
+            "src/scripts/commandHandler.js",
+            "src/scripts/storageHandler.js",
+            "src/scripts/documentHandler.js",
+            "src/scripts/index.js"
+        ],
+        "matches": [
+            "https://*.sydle.one/*"
+        ]
+    }],
+
+    "background": {
+        "service_worker": "service-worker.js",
+        "type": "module"
+    },
+    
+    "web_accessible_resources": [
+        {
+            "resources": [
+                "lib/sweetalert2.all.min.js", 
+                "lib/jquery.min.js", 
+                "lib/jquery-ui.min.js", 
+                "lib/jquery-ui.min.css", 
+                "lib/renderjson.js", 
+                "src/styles/styles.css",
+                "src/styles/editor.css"
+            ],
+            "matches": [
+                "https://*.sydle.one/*"
+            ]
+        }
+    ],
+
+    "commands": {
+        "Abrir classe": {
+            "suggested_key": {
+                "default": "Alt+C",
+                "mac": "Alt+C"
+            },
+            "description": "Abrir classe"
+        },
+        "Listar classe": {
+            "suggested_key": {
+                "default": "Alt+L",
+                "mac": "Alt+L"
+            },
+            "description": "Listar classe"
+        },
+
+        "Editar objeto": {
+            "description": "Editar objeto"
+        },
+        "Salvar objeto": {
+            "description": "Salvar objeto"
+        },
+        "Cancelar edição": {
+            "description": "Cancelar edição"
+        },
+
+        "Duplicar objeto": {
+            "description": "Duplicar objeto"
+        },
+        "Histórico do objeto": {
+            "description": "Histórico do objeto"
+        },
+        "Campos do objeto": {
+            "description": "Campos do objeto"
+        },
+
+        "Id do objeto": {
+            "description": "Id do objeto",
+            "suggested_key": {
+                "default": "Alt+I",
+                "mac": "Alt+I"
+            }
+        },
+
+        "Json do objeto": {
+            "description": "Json do objeto",
+            "suggested_key": {
+                "default": "Alt+J",
+                "mac": "Alt+J"
+            }
+        },
+
+        "Abrir aba de detalhes": {
+            "description": "Abrir aba de detalhes"
+        },
+        "Abrir aba de dados": {
+            "description": "Abrir aba de dados"
+        },
+        "Abrir aba de timeline": {
+            "description": "Abrir aba de timeline"
+        }
+    }
+}

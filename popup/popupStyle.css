@@ -1,0 +1,142 @@
+body {
+    display: flex;
+    flex-direction: column;
+    background-color: #f0f0f0;
+    width: 350px;
+    height: 100%;
+    transition: all 1s;
+}
+
+#tabs-list {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.tab {
+    background-color: #e3e3e3;
+    color: #9c9c9c;
+    height: 45px;
+    width: 100%;
+    border: none;
+    font-size: 15px;
+    outline: none;
+    cursor: pointer;
+    font-weight: 700;
+    transition: all 0.1s;
+}
+
+.tab.active {
+    background-color: #ffffff;
+    color: #616161;
+}
+
+.section {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    margin: 0px 35px 16px 35px;
+}
+
+.section-item {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    font-weight: 600;
+}
+
+.section-item span {
+    align-self: center;
+}
+
+.section-item.separator {
+    border-bottom: 1px solid #e9e9e9;
+    padding-bottom: 1rem;
+}
+
+.button-group {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    margin-bottom: 1rem;
+}
+
+.link-button {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 40px;
+    width: 100%;
+    font-weight: 600;
+    background-color: #ffffff;
+    border: 1px solid #e3e3e3;
+}
+
+.button-group > .link-button:first-child {
+    border-radius: 5px 5px 0px 0px;
+}
+
+.button-group > .link-button:last-child {
+    border-radius: 0px 0px 5px 5px;
+}
+
+.link-button ~ .link-button {
+    border-top: none;
+}
+
+.link-button:hover {
+    background-color: #e3e3e3;
+}
+
+.link-button:disabled:hover {
+    background-color: #ffffff;
+}
+
+.link-button i {
+    padding-left: 15px;
+}
+
+.link-button p {
+    padding-left: 15px;
+    margin: unset !important;
+}
+
+.form-check-input:checked {
+    background-color: rgb(26, 26, 26) !important;
+    border-color: rgb(26, 26, 26) !important;
+}
+
+
+.form-check-input {
+    /* clear: left; */
+    
+}
+  
+.form-switch.form-switch-sm .form-check-input {
+    height: 1rem;
+    width: calc(1rem + 0.75rem);
+    border-radius: 2rem;
+}
+
+  
+.form-switch.form-switch-md .form-check-input {
+    height: 1.5rem;
+    width: calc(2rem + 0.75rem);
+    border-radius: 3rem;
+}
+  
+  
+.form-switch.form-switch-lg .form-check-input {
+    height: 2rem;
+    width: calc(3rem + 0.75rem);
+    border-radius: 4rem;
+}
+
+  
+.form-switch.form-switch-xl .form-check-input {
+    height: 2.5rem;
+    width: calc(4rem + 0.75rem);
+    border-radius: 5rem;
+}

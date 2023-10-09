@@ -1,0 +1,276 @@
+/******************************************** Ace Editor Styling ********************************************/
+:root {
+    --window-border: #21252b;
+    --window-search-background: #21252b;
+    --window-search-field-background: #181d22;
+    --window-search-field-color: #abb2bf;
+    --window-search-button-background: #181d22;
+
+    --script-tree-font-color: #cccccc;
+    --script-tree-font-size: 16px;
+    --script-tree-background: #21252b;
+    --script-tree-background-selected: #2c313a;
+    --gutter-color: #636d83;
+    --gutter-background: #21252b;
+    --gutter-active-line: #24292f;
+
+    --editor-active-line-background: #2c313c;
+    --editor-bracket-color: #3888ff;
+    --editor-indent-guide: #3a3f4c;
+    --editor-keyword: #c47cdc;
+    --editor-storage: #c47cdc;
+    --editor-string: #88c86c;
+    --editor-function: #57afef;
+    --editor-numeric: #d19a66;
+    --editor-language: #e5c07b;
+    --editor-comment: #5c6370;
+    --editor-constant: #e06c75;
+    --editor-identifier: #abb2bf;
+    --editor-cursor: #5a85ff;
+    --editor-operator: #56b6c2;
+    --editor-paren: #c47cdc;
+    --editor-selection: #3e4451;
+    --editor-background: #282c34;
+    --editor-border: #21252b;
+    --editor-selection-marker: #88888;
+
+    --autocomplete-background: #21252b;
+    --autocomplete-outline: #181818;
+    --autocomplete-suggestion-focus: #ffffff14;
+    --autocomplete-suggestion-hover: #ffffff0b;
+    --autocomplete-shortcut-color: #abb2bf;
+    --autocomplete-shortcut-info-color: #5e5e5e;
+}
+
+.modal-header {
+    background-color: var(--window-border) !important;
+    color: #abb2bf !important;
+}
+
+.modal-content {
+    background-color: var(--window-border) !important;
+}
+
+sy-script-tree .ui-tree {
+    background-color: var(--script-tree-background) !important;
+}
+
+sy-script-tree .ui-treenode-label {
+    padding: 0 10px !important;
+}
+
+sy-script-tree .ui-corner-all {
+    padding-left: 15px !important;
+}
+
+sy-script-tree .fa-plus-square-o {
+    filter: brightness(1.6) !important;
+}
+
+.modal-header button {
+    filter: invert(0.8) !important
+}
+
+sy-script-tree .node-selected .ui-treenode-content,
+sy-script-tree .node-selected {
+    background-color: var(--script-tree-background-selected) !important;
+}
+
+.treeContainer button {
+    background-color: var(--script-tree-background) !important;
+    height: 50px !important;
+    border: 1px solid var(--script-tree-background) !important;
+    border-right: 1px solid var(--script-tree-background) !important;
+}
+
+.treeContainer button span {
+    filter: brightness(2) !important;
+}
+
+.ui-tree .ui-treenode-content {
+    padding-left: 8px !important;
+}
+
+sy-script-tree .ng-star-inserted {
+    font-size: var(--script-tree-font-size) !important;
+    font-weight: 300;
+    color: var(--script-tree-font-color) !important;
+}
+
+.ace_gutter {
+    color: var(--gutter-color) !important;
+    background-color: var(--gutter-background) !important;
+}
+
+.ace-chrome .ace_gutter-active-line {
+    background-color: var(--gutter-active-line) !important;
+}
+
+.ace_active-line {
+    background-color: var(--editor-active-line-background) !important;
+}
+
+.ace_bracket {
+    border-color: var(--editor-bracket-color);
+}
+
+.ace_indent-guide {
+    background: none !important;
+    border-right: 1px solid var(--editor-indent-guide) !important;
+}
+
+.ace_keyword {
+    color: var(--editor-keyword) !important;
+}
+.ace_storage {
+    color: var(--editor-storage) !important;
+}
+.ace_string {
+    color: var(--editor-string) !important;
+}
+.ace_function {
+    color: var(--editor-function) !important;
+}
+.ace_numeric {
+    color: var(--editor-numeric) !important;
+}
+.ace_language {
+    color: var(--editor-language) !important;                                                                                                             
+}
+.ace_comment {
+    color: var(--editor-comment) !important;
+}
+.ace_constant {
+    color: var(--editor-constant) !important;
+}
+
+.ace_identifier {
+    color: var(--editor-identifier) !important;
+}
+
+.ace_operator {
+    color: var(--editor-operator) !important;
+}
+
+.ace_paren  {
+    color: var(--editor-paren) !important;
+}
+
+.ace-chrome .ace_marker-layer .ace_selection {
+    background: var(--editor-selection) !important;
+}
+
+.ace-chrome {
+    font-size: 18px !important;
+    background-color: var(--editor-background) !important;
+    border-right: 1px solid var(--editor-border) !important;
+}
+
+.ace-chrome .ace_cursor {
+    color: var(--editor-cursor) !important;
+}
+
+.ace-chrome .ace_marker-layer .ace_bracket {
+    margin: 0px !important;
+    border-color: var(--editor-selection-marker) !important;
+}
+
+.ace_search {
+    border: none !important;
+    background: var(--window-search-background) !important;
+
+    -webkit-box-shadow: 0px 0px 16px -3px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 16px -3px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 16px -3px rgba(0,0,0,0.75);
+    top: 0px !important;
+    right: 30px !important;
+    border-radius: 0px 0px 5px 5px !important;
+}
+
+.ace_search_form {
+    border: none !important;
+}
+
+.ace_search_field {
+    background-color: var(--window-search-field-background) !important;
+    color: var(--window-search-field-color) !important;
+    border-bottom: none !important;
+    border: none !important;
+}
+
+.ace_search_form.ace_nomatch {
+    outline: none !important;
+}
+
+.ace_searchbtn {
+    background-color: var(--window-search-button-background) !important;
+    color: var(--window-search-field-color) !important;
+    border: none !important;
+    width: 34px !important;
+}
+
+.ace_searchbtn:hover {
+    filter: brightness(2) !important;
+}
+
+input:focus .ace_search_field {
+    border: none !important;
+}
+
+.ace_search_options .ace_button {
+    color: #cccccc !important;
+}
+
+.sy-bottom-fab-container button[title="Editar script"] {
+    background-color: #333842 !important;
+}
+/************************************************************************************************************/
+/***************************************** Autocomplete Styling *********************************************/
+#editor-autocomplete-window {
+    display: flex;
+    position: absolute;
+    flex-direction: column;
+    width: 350px;
+    max-height: 250px;
+    background-color: var(--autocomplete-background);
+    border: 1px solid var(--autocomplete-outline);
+    border-radius: 4px;
+    overflow-y: scroll;
+    z-index: 9999;
+}
+
+.autocomplete-suggestion {
+    background-color: var(--autocomplete-background);
+    border: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100% !important;
+    height: 26px !important;
+    padding: 2px 5px 2px 5px !important;
+    font: 12px/normal 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace !important;
+}
+
+.autocomplete-suggestion:focus {
+    background-color: var(--autocomplete-suggestion-focus);
+}
+
+.autocomplete-suggestion:hover {
+    background-color: var(--autocomplete-suggestion-hover);
+    cursor: pointer;
+}
+
+.autocomplete-suggestion h1 {
+    color: var(--autocomplete-shortcut-color);
+    font-size: 18px !important;
+    margin: 0px !important;
+    align-self: center;
+}
+
+.autocomplete-suggestion h2 {
+    color: var(--autocomplete-shortcut-info-color);
+    font-size: 18px !important;
+    margin: 0px !important;
+    align-self: center;
+}
+/************************************************************************************************************/
