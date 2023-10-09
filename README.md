@@ -101,9 +101,14 @@ Este projeto foi desenvolvido como uma extensão para o navegador Google Chrome 
 
 3. Clique na opção "Carregar sem compactação"
 
+4. Selecione a pasta do repositório e confirme
+   
+5. Configure os atalhos clicando na Extensão > Configuração > Configurar Atalhos
+```sh
 
-  4. Selecione a pasta do repositório e confirme
-  5. Configure os atalhos clicando na Extensão > Configuração > Configurar Atalhos
+ chrome://extensions/shortcuts
+
+```
 
 ### Limitações
 
@@ -196,7 +201,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
   
 
-<p  align="right">(<a  href="#readme-top">back to top</a>)</p>
+<p  align="right">(<a  href="#readme-top">voltar ao topo</a>)</p>
 
   
   
