@@ -115,8 +115,7 @@ sy-script-tree .ng-star-inserted {
 }
 
 .ace_indent-guide {
-    background: none !important;
-    border-right: 1px solid var(--editor-indent-guide) !important;
+    background: url('https://mpce-dev.sydle.one/api/1/main/_ecm/_defaultFile/www/Utilitarios/imagem de fundo do cursor versão tema one dark.png/') right repeat-y !important;
 }
 
 .ace_keyword {
