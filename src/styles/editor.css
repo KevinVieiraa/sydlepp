@@ -117,6 +117,7 @@ sy-script-tree .ng-star-inserted {
 .ace_indent-guide {
     background: none !important;
     border-right: 1px solid var(--editor-indent-guide) !important;
+    margin-right: -1px;
 }
 
 .ace_keyword {
