@@ -38,7 +38,7 @@
         ],
         "matches": [
             "https://*.sydle.one/*",
-            "https://sydle*"
+            "https://sydle.sefaz.pi.gov.br/*"
         ]
     }],
 
@@ -60,7 +60,7 @@
             ],
             "matches": [
                 "https://*.sydle.one/*",
-                "https://sydle*"
+                "https://sydle.sefaz.pi.gov.br/*"
             ]
         }
     ],
