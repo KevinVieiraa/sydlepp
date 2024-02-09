@@ -37,7 +37,8 @@
             "src/scripts/index.js"
         ],
         "matches": [
-            "https://*.sydle.one/*"
+            "https://*.sydle.one/*",
+            "https://sydle*"
         ]
     }],
 
@@ -58,7 +59,8 @@
                 "src/styles/editor.css"
             ],
             "matches": [
-                "https://*.sydle.one/*"
+                "https://*.sydle.one/*",
+                "https://sydle*"
             ]
         }
     ],
