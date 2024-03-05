@@ -22,7 +22,8 @@ const COMMANDS_MAP = {
     "Proxima sugestão": cmdNextSuggestion,
     "Sugestão anterior": cmdPreviousSuggestion,
 
-    "Abrir Janela de Snippet": cmdShowSnippetWindow
+    "Abrir Janela de Snippet": cmdShowSnippetWindow,
+    "Renomear tab": cmdChangeTabTitle
 }
 
 function cmdOpenSearchClass() {
@@ -487,6 +488,40 @@ function cmdShowSnippetWindow(snippetName) {
     });
 }
 
+function changeDocumentTitle(name){
+    document.title = name
+}
+
+function openChangeTabTitlePrompt(){
+    Swal.fire({
+        title: "Digite o novo nome para a sua tab",
+        input: 'text',
+        inputAttributes: {
+            autocapitalize: 'off'
+        },
+        showCancelButton: false,
+        confirmButtonText: "Alterar",
+        confirmButtonColor: '#1C3C2E',
+        showLoaderOnConfirm: true,
+        preConfirm: (name) => {
+            return name;
+        },
+        allowOutsideClick: () => !Swal.isLoading()
+    })
+    .then((name) => {
+        const valueName = name.value
+
+        if(!valueName)
+            return;
+
+            changeDocumentTitle(valueName)
+    });
+}
+
+function cmdChangeTabTitle(){
+    openChangeTabTitlePrompt()
+}
+
 function initializeCommands() {
     chrome.runtime.onMessage.addListener((message) => {
         if(!message.parameters){
@@ -497,3 +532,4 @@ function initializeCommands() {
         COMMANDS_MAP[message.action].apply(this, message.parameters);
     });
 }
+

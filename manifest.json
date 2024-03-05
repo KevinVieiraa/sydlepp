@@ -125,6 +125,9 @@
         },
         "Abrir aba de timeline": {
             "description": "Abrir aba de timeline"
+        },
+        "Renomear tab": {
+            "description": "Renomear tab"
         }
     }
 }
