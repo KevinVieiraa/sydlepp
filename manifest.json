@@ -1,7 +1,7 @@
 {
     "manifest_version": 3,
 
-    "name": "Sydle++",
+    "name": "Sydle++ Workspaces",
     "version": "1.0",
     "description": "Implementação de atalhos e funcionalidades de produtividade para a plataforma Sydle One",
 
@@ -12,7 +12,7 @@
     },
 
     "action": {
-        "default_title": "Sydle++", 
+        "default_title": "Sydle++ Workspaces", 
         "default_popup": "popup/popup.html" 
     },
 
@@ -30,7 +30,6 @@
             "lib/renderjson.js", 
             "src/scripts/config.js",
             "src/scripts/utils.js",
-            "src/scripts/autocompleteHandler.js",
             "src/scripts/commandHandler.js",
             "src/scripts/storageHandler.js",
             "src/scripts/documentHandler.js",

@@ -1,5 +1,3 @@
-//TODO: Comentar arquivo
-
 const COMMANDS_MAP = {
     "Abrir classe": cmdOpenSearchClass,
     "Listar classe": cmdOpenClassListing,
@@ -19,10 +17,6 @@ const COMMANDS_MAP = {
     "Abrir aba de dados": cmdOpenTabData,
     "Abrir aba de timeline": cmdOpenTabTimeline,
 
-    "Proxima sugestão": cmdNextSuggestion,
-    "Sugestão anterior": cmdPreviousSuggestion,
-
-    "Abrir Janela de Snippet": cmdShowSnippetWindow,
     "Renomear tab": cmdChangeTabTitle
 }
 
@@ -81,10 +75,12 @@ function searchClass(search, view) {
         });
 
         if (found) {
-            clickClass({
-                packageName: p.packageName,
-                className: found.name
-            });
+            try {
+                clickClass({
+                    packageName: p.packageName,
+                    className: found.name
+                });
+            } catch(e) {}
             listObjects(found._id)
             if (view == "show") openClass(found._id);
         }
@@ -108,57 +104,52 @@ function searchClass(search, view) {
         });
 
         if (found) {
-            clickClass({
-                packageName: p.packageName,
-                className: found.name
-            });
+            try {
+                clickClass({
+                    packageName: p.packageName,
+                    className: found.name
+                });
+            } catch(e) {}
             listObjects(found._id);
             if (view == "show") openClass(found._id);
         }
 
         return Boolean(found);
     });
-    
 
     return Boolean(match);
+}
+
+
+function getElements(root) {
+    return Array.from(root.querySelectorAll('*')).flatMap(item => (item.shadowRoot ? [item, ...getElements(item.shadowRoot)] : [item]));
 }
 
 //TODO: avaliar se deve estar em outro arquivo
 function clickClass(config) {
     let packageName = config.packageName;
     let className = config.className;
+    
     let doc = window.parent ? window.parent.document : window.document;
-    let packageMenu = Array.from(doc.querySelector('iframe[slotname=explorer_class_listing]').contentDocument.querySelectorAll('span')).find(el => el.innerText === packageName);
-    let classeMenu = Array.from(doc.querySelector('iframe[slotname=explorer_class_listing]').contentDocument.querySelectorAll('span')).find(el => el.innerText === className);
 
-    if (!classeMenu && packageMenu) {
-        packageMenu.click();
-        classeMenu = Array.from(doc.querySelector('iframe[slotname=explorer_class_listing]').contentDocument.querySelectorAll('span')).find(el => el.innerText === className);
+    let elements = getElements(doc);
+
+    let tree = elements.find(element => element.localName === "sy-tree" && element["s-hn"] === "SY-ONE-CLASS-LIST-TREE");
+
+    let packageNode = Array.from(tree.childNodes).find(node => node.firstChild && node.firstChild.innerText === packageName);
+
+    let classList = Array.from(packageNode.childNodes);
+
+    let classNode = classList.find(node => node.localName === "sy-tree-node" && node.innerText === className);
+
+    if(!classNode && packageNode) {
+        packageNode.click();
+        classList = Array.from(packageNode.childNodes);
+        classNode = classList.find(node => node.innerText === className);
     }
 
-    if (classeMenu) {
-        classeMenu.click();
-        setTimeout(function () {
-            if (config.search) {
-                doc.querySelector('iframe[slotname=explorer_object_listing]').contentDocument.querySelector('.list-search').value = config.search;
-                let eventObj = doc.querySelector('iframe[slotname=explorer_object_listing]').contentDocument.createEvent('HTMLEvents');
-                eventObj.initEvent('input', true, true)
-                doc.querySelector('iframe[slotname=explorer_object_listing]').contentDocument.querySelector('.list-search').dispatchEvent(eventObj)
-                doc.querySelector('iframe[slotname=explorer_object_listing]').contentDocument.querySelector('.search-button').click();
-                setTimeout(function () {
-                    let cards = doc.querySelector('iframe[slotname=explorer_object_listing]').contentDocument.querySelector('.card-item .card-item .card');
-                    let card = cards && cards.length > 0 ? cards[0] : cards;
-
- 
-
-                    if (card) {
-                        card.click();
-                    }
-                }, 1000)
-            }
-            
-            // doc.querySelector('iframe[slotname=explorer_object_listing]').contentDocument.querySelector('.list-search').focus();
-        }, 500);
+    if (classNode) {
+        classNode.click();
     }
 }
 
@@ -303,11 +294,12 @@ function cmdClickFieldsButton() {
 }
 
 function cmdShowObjectIdWindow() {
-    let objectId = getActiveObjectIds().id;
+    let objectInfo = getActiveObjectIds();
 
     Swal.fire({
-        title: "Id copiado!",
-        text: objectId,
+        title: "ID copiado!",
+        html: `<p><b>_id:</b> ${objectInfo.id}</p>` +
+              `<p><b>_classId:</b> ${objectInfo.cid}</p>`,
         showConfirmButton: false,
         showCancelButton: false
     });
@@ -340,24 +332,20 @@ function cmdShowObjectJsonWindow() {
 }
 
 function getActiveObjectIds() {
-    let doc = window.parent ? window.parent.document : window.document;
-    let iFrame = doc.querySelector('iframe[slotname=explorer_object_details]') || doc.querySelector('iframe[slotname=permalink-workspace-slot]');
+    let doc = window.document;
+    let elements = getElements(doc);
+    let objectView = elements.find(element => element.localName === "sy-one-object-view");
 
-    let objectDetails = iFrame;
-
-    if(!objectDetails || !objectDetails.src)
+    if(!objectView)
         return "";
 
-    let queryString = objectDetails.src.split('?')[1];
-
-    let urlParams = new URLSearchParams(queryString);
-    let id = urlParams.get("id");
-    let cid = urlParams.get("cid");
+    let id = objectView.getAttribute("object-id");
+    let cid = objectView.getAttribute("class-id");
 
     setTimeout(async ()=> {
         await window.navigator.clipboard.writeText(id);
     }, 250);
-
+    
     return {id: id, cid: cid};
 }
 
@@ -391,101 +379,6 @@ function clickObjectTab(tabName) {
     
     let button = Array.from(queryResult).find(result => result.outerText && result.outerText === tabName);
     button.click();
-}
-
-function cmdNextSuggestion() {
-    updateSuggestion(1);
-}
-
-function cmdPreviousSuggestion() {
-    updateSuggestion(-1);
-}
-
-function searchSnippet(field, value) {
-    let snippet = getSnippets().find(snippet => snippet[field] === value);
-
-    return snippet;
-}
-
-function cmdShowSnippetWindow(snippetName) {
-    let snippet = searchSnippet("name", snippetName);
-    let isNewSnippet = snippet === null || snippet === undefined;
-
-    let title = isNewSnippet ? "Novo Snippet" : "Editar Snippet";
-
-    let name = isNewSnippet ? `""` : `"${snippet.name}"`;
-    let shortcut = isNewSnippet ? `""` : `"${snippet.shortcut}"`;
-    let value = isNewSnippet ? "" : snippet.value;
-
-    //Permite usar o Tab no campo do snippet
-    let onKeyDown = `"if(event.keyCode===9){
-        event.preventDefault();
-        event.stopImmediatePropagation();
-        document.execCommand('insertText', false, '\t');
-    }"`;
-    
-    Swal.fire({
-        title: title,
-        html: `<input id="original-name-input" value=${name} type="hidden">` +
-              `<input id="create-snippet-input" value=${isNewSnippet} type="hidden">` +
-              `<input id="name-input" class="swal2-input" placeholder="Nome" value=${name}>` +
-              `<input id="shortcut-input" class="swal2-input" placeholder="Atalho" value=${shortcut}>` + 
-              `<textarea id="value-input" class="swal2-textarea" placeholder="//Insira o snippet aqui" onkeydown=${onKeyDown}>${value}</textarea>`,
-        showConfirmButton: true,
-        showDenyButton: !isNewSnippet,
-        showCancelButton: true,
-        confirmButtonText:'<i class="fa fa-check"></i> Salvar',
-        confirmButtonColor: '#429767',
-        cancelButtonText: 'Cancelar',
-        cancelButtonColor: '#9e9e9e',
-        denyButtonText: `<i class="fa fa-trash-o"></i> Apagar`,
-        denyButtonColor: `#941c24`,
-        reverseButtons: true,
-        width: '800px',
-        preConfirm: () => {
-            let nameInput = Swal.getPopup().querySelector('#name-input').value;
-            let shortcutInput = Swal.getPopup().querySelector('#shortcut-input').value;
-            let valueInput = Swal.getPopup().querySelector('#value-input').value;
-            let isNewSnippet = Swal.getPopup().querySelector('#create-snippet-input').value === "true";
-
-            if (!nameInput || !shortcutInput || !valueInput) {
-                Swal.showValidationMessage(`Por favor, preencha todos os campos`);
-            }
-
-            if(isNewSnippet && searchSnippet("name", nameInput)) {
-                Swal.showValidationMessage(`Já existe um snippet com esse nome`);
-            }
-
-            if(isNewSnippet && searchSnippet("shortcut", shortcutInput)) {
-                Swal.showValidationMessage(`Já existe um snippet com esse atalho`);
-            }
-
-            return { snippet: { name: nameInput, shortcut: shortcutInput, value: valueInput} , isNew: isNewSnippet };
-        }
-    })
-    .then((result) => {
-        let snippets = getSnippets();
-
-        if(result.isConfirmed) {
-            if(result.value.isNew) {
-                snippets.push(result.value.snippet);
-                setSnippets({"snippets": snippets});
-                return;
-            }
-            
-            let snippetIndex = snippets.findIndex(snippet => snippet.shortcut === result.value.snippet.shortcut);
-            snippets[snippetIndex] = result.value.snippet;
-            setSnippets({"snippets": snippets});
-            chrome.runtime.sendMessage({ action: "Reload Snippets" });
-        }
-        else if(result.isDenied) {
-            let nameInput = Swal.getPopup().querySelector('#original-name-input').value;
-
-            snippets = snippets.filter(snippet => snippet.name !== nameInput);
-            setSnippets({"snippets": snippets});
-            chrome.runtime.sendMessage({ action: "Reload Snippets" });
-        }
-    });
 }
 
 function changeDocumentTitle(name){

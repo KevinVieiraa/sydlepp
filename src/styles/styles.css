@@ -76,6 +76,8 @@
 	padding: 1em !important;
     border-radius: 5px;
     max-height: 70vh;
+    font-size: 16px;
+    line-height: 22px;
 }
 
 .renderjson a {

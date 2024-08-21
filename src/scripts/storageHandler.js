@@ -16,33 +16,3 @@ function loadClassTree() {
     }
     catch(error) {}
 }
-
-function getSnippets() {
-    let snippets = JSON.parse(localStorage.getItem('snippets'));
-    return snippets.snippets;
-}
-
-function setSnippets(snippets) {
-    chrome.storage.local.set({
-        snippets
-    })
-    .then(() => {
-        localStorage.setItem('snippets', JSON.stringify(snippets));
-    });
-}
-
-function loadDefaultUserSnippets() {
-    let snippets = CONFIG.default_snippets;
-    
-    setSnippets(snippets);
-}
-
-function loadUserSnippets() {
-    chrome.storage.local.get(["snippets"])
-    .then(result => {
-        if(!result.snippets)
-            loadDefaultUserSnippets();
-
-        localStorage.setItem('snippets', JSON.stringify(result.snippets));
-    });
-}
