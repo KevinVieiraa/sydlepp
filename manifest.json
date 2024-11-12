@@ -2,7 +2,7 @@
     "manifest_version": 3,
 
     "name": "Sydle++",
-    "version": "1.0",
+    "version": "1.1.0",
     "description": "Implementação de atalhos e funcionalidades de produtividade para a plataforma Sydle One",
 
     "icons": {
@@ -30,7 +30,6 @@
             "lib/renderjson.js", 
             "src/scripts/config.js",
             "src/scripts/utils.js",
-            "src/scripts/autocompleteHandler.js",
             "src/scripts/commandHandler.js",
             "src/scripts/storageHandler.js",
             "src/scripts/documentHandler.js",

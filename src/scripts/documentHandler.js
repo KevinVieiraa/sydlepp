@@ -19,22 +19,10 @@ function injectScript (filename, callback) {
     document.getElementsByTagName("head")[0].appendChild(script);
 }
 
-function observeForInitAutocompleteWindow(element) {
-    let elementObserver = new MutationObserver(() => {
-        if(!getScriptBlockElement() || existsAutocompleteWindow())
-            return;
-        
-        initAutocompleteWindow();
-    });
-    
-    elementObserver.observe(element, { childList: true, subtree: true });
-}
-
 function onLoadIFrame(iFrame, stylesPaths) {
-    iFrame.addEventListener('load', () => {
-        stylesPaths.forEach(path => injectStylesheet(path, iFrame.contentDocument.head))
-        observeForInitAutocompleteWindow(iFrame.contentDocument);
-    });
+    // iFrame.addEventListener('load', () => {
+    //     stylesPaths.forEach(path => injectStylesheet(path, iFrame.contentDocument.head))
+    // });
 }
 
 let alreadyUpdatedIFrames = [];
