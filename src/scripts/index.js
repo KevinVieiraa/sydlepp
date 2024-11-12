@@ -7,6 +7,4 @@ injectScript('lib/sweetalert2.all.min.js');
 
 initializeCommands();
 
-loadUserSnippets();
-
 loadClassTree();

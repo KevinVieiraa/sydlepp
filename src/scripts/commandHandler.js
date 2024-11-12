@@ -334,13 +334,15 @@ function cmdShowObjectJsonWindow() {
 function getActiveObjectIds() {
     let doc = window.document;
     let elements = getElements(doc);
-    let objectView = elements.find(element => element.localName === "sy-one-object-view");
+    let objectViews = elements.filter(element => element.localName === "sy-one-object-view" || element.localName === "sy-one-process-instance-view" || element.localName === "sy-one-user-task-view");
+    
+    let object = objectViews[objectViews.length - 1];
 
-    if(!objectView)
-        return "";
+    if(!object)
+        return {id: "", cid: ""}
 
-    let id = objectView.getAttribute("object-id");
-    let cid = objectView.getAttribute("class-id");
+    let id = object.getAttribute("object-id");
+    let cid = object.getAttribute("class-id");
 
     setTimeout(async ()=> {
         await window.navigator.clipboard.writeText(id);

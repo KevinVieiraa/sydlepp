@@ -20,9 +20,9 @@ function injectScript (filename, callback) {
 }
 
 function onLoadIFrame(iFrame, stylesPaths) {
-    iFrame.addEventListener('load', () => {
-        stylesPaths.forEach(path => injectStylesheet(path, iFrame.contentDocument.head))
-    });
+    // iFrame.addEventListener('load', () => {
+    //     stylesPaths.forEach(path => injectStylesheet(path, iFrame.contentDocument.head))
+    // });
 }
 
 let alreadyUpdatedIFrames = [];
