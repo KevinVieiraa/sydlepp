@@ -165,6 +165,21 @@ function openObject(cid, id) {
     open('explorer_object_details', cid, id);
 }
 
+/**
+ * Abre uma classe a partir do objeto atualmente ativo
+ * Combina a obtenção do ID/classId com a abertura da classe
+ */
+function openClassFromActiveObject() {
+    const objectInfo = getActiveObjectIds();
+    
+    if (!objectInfo.cid) {
+        console.warn("Nenhuma classe ID encontrada para o objeto ativo");
+        return;
+    }
+    
+    openClass(objectInfo.cid);
+}
+
 function open(view, cid, id) {
     let body = {
         "view": view,
