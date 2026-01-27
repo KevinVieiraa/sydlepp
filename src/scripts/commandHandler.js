@@ -17,7 +17,8 @@ const COMMANDS_MAP = {
     "Abrir aba de dados": cmdOpenTabData,
     "Abrir aba de timeline": cmdOpenTabTimeline,
 
-    "Renomear tab": cmdChangeTabTitle
+    "Renomear tab": cmdChangeTabTitle,
+    "Abrir classe do objeto": openClassFromActiveObject
 }
 
 function cmdOpenSearchClass() {
