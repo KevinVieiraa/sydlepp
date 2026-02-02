@@ -31,6 +31,7 @@
             "src/scripts/config.js",
             "src/scripts/utils.js",
             "src/scripts/commandHandler.js",
+            "src/scripts/autocompleteHandler.js",
             "src/scripts/storageHandler.js",
             "src/scripts/documentHandler.js",
             "src/scripts/index.js"
@@ -127,6 +128,9 @@
         },
         "Renomear tab": {
             "description": "Renomear tab"
+        },
+        "Abrir classe do objeto": {
+            "description": "Abrir classe do objeto ativo"
         }
     }
 }
